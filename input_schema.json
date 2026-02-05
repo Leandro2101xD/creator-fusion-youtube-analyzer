@@ -1,0 +1,64 @@
+{
+    "title": "YouTube Creator Analyzer",
+    "description": "Analyze YouTube channels for brand partnership potential. Provide your YouTube Data API v3 key and a list of channels.",
+    "type": "object",
+    "schemaVersion": 1,
+    "required": ["apiKey", "channels"],
+    "properties": {
+        "apiKey": {
+            "title": "YouTube Data API v3 Key",
+            "type": "string",
+            "description": "Your YouTube Data API v3 key. Get one free at https://console.cloud.google.com/apis/library/youtube.googleapis.com",
+            "editor": "textfield",
+            "isSecret": true
+        },
+        "channels": {
+            "title": "Channel Inputs",
+            "type": "array",
+            "description": "List of YouTube channels to analyze. Accepts channel URLs, @handles, or channel IDs.",
+            "editor": "stringList",
+            "prefill": ["@mkbhd", "@PewDiePie"]
+        },
+        "videosPerChannel": {
+            "title": "Videos to Analyze Per Channel",
+            "type": "integer",
+            "description": "Number of recent videos to analyze per channel. More videos = more accurate metrics but more API quota used (~1 unit per 50 videos).",
+            "default": 30,
+            "minimum": 5,
+            "maximum": 200
+        },
+        "enableSponsorshipDetection": {
+            "title": "Enable Sponsorship Detection",
+            "type": "boolean",
+            "description": "Scan video descriptions for sponsorship indicators (#ad, affiliate links, brand deals). No extra API cost.",
+            "default": true
+        },
+        "enableAuthenticityCheck": {
+            "title": "Enable Engagement Authenticity Check",
+            "type": "boolean",
+            "description": "Run statistical analysis to detect potentially inauthentic engagement (bought views, fake likes). No extra API cost.",
+            "default": true
+        },
+        "enableRateCard": {
+            "title": "Generate Rate Cards",
+            "type": "boolean",
+            "description": "Generate estimated sponsorship rate cards based on channel metrics and tier.",
+            "default": true
+        },
+        "minSubscribers": {
+            "title": "Minimum Subscribers",
+            "type": "integer",
+            "description": "Skip channels below this subscriber count. Set to 0 to include all.",
+            "default": 0,
+            "minimum": 0
+        },
+        "minEngagementRate": {
+            "title": "Minimum Engagement Rate (%)",
+            "type": "number",
+            "description": "Skip channels below this engagement rate. Set to 0 to include all.",
+            "default": 0,
+            "minimum": 0,
+            "maximum": 100
+        }
+    }
+}

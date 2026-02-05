@@ -1,0 +1,19 @@
+{
+    "name": "creator-fusion-youtube-analyzer",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "YouTube Creator Analyzer for brand partnerships — engagement metrics, Creator Score, sponsorship detection, authenticity signals, and rate cards. Zero proxy cost.",
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "dependencies": {
+        "apify": "^3.1.0",
+        "got-scraping": "^4.0.0"
+    },
+    "scripts": {
+        "start": "node src/main.js",
+        "test": "node --test src/__tests__/*.js"
+    },
+    "author": "Creator Fusion LLC",
+    "license": "SEE LICENSE IN LICENSE"
+}

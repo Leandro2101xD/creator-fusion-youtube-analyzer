@@ -1,0 +1,8 @@
+node_modules/
+package-lock.json
+.env
+apify_storage/
+storage/
+.idea/
+.vscode/
+*.log

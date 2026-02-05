@@ -1,0 +1,48 @@
+{
+    "actorSpecification": 1,
+    "name": "youtube-creator-analyzer",
+    "title": "YouTube Creator Analyzer for Brand Partnerships",
+    "description": "Analyze YouTube creators for brand deals — Creator Score, engagement metrics, sponsorship history detection, engagement authenticity signals, and rate card generation. Uses YouTube Data API v3 (zero proxy cost).",
+    "version": "1.0.0",
+    "buildTag": "latest",
+    "input": "./input_schema.json",
+    "dockerfile": "./Dockerfile",
+    "storages": {
+        "dataset": {
+            "actorSpecification": 1,
+            "title": "Creator Analysis Results",
+            "views": {
+                "overview": {
+                    "title": "Overview",
+                    "transformation": {
+                        "fields": [
+                            "channelName",
+                            "creatorScore.score",
+                            "creatorScore.grade",
+                            "creatorScore.tier",
+                            "analytics.engagementRate",
+                            "analytics.postsPerWeek",
+                            "sponsorship.totalDetected",
+                            "authenticity.score",
+                            "rateCard.estimatedIntegrationRate.mid"
+                        ]
+                    },
+                    "display": {
+                        "component": "table",
+                        "properties": {
+                            "channelName": { "label": "Channel", "format": "text" },
+                            "creatorScore.score": { "label": "Score", "format": "number" },
+                            "creatorScore.grade": { "label": "Grade", "format": "text" },
+                            "creatorScore.tier": { "label": "Tier", "format": "text" },
+                            "analytics.engagementRate": { "label": "Engagement %", "format": "number" },
+                            "analytics.postsPerWeek": { "label": "Posts/Week", "format": "number" },
+                            "sponsorship.totalDetected": { "label": "Sponsorships Found", "format": "number" },
+                            "authenticity.score": { "label": "Authenticity", "format": "number" },
+                            "rateCard.estimatedIntegrationRate.mid": { "label": "Est. Rate (USD)", "format": "number" }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
