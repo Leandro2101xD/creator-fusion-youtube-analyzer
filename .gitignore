@@ -6,3 +6,4 @@ storage/
 .idea/
 .vscode/
 *.log
+test-input.json
