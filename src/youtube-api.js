@@ -32,6 +32,8 @@ export class YouTubeClient {
         this.quotaUsed = 0;
         this.requestCount = 0;
         this.errors = [];
+        /** @type {Map<string, Promise<string|null>>} handle → resolution promise cache */
+        this._channelIdCache = new Map();
     }
 
     /**
@@ -120,7 +122,10 @@ export class YouTubeClient {
     async resolveChannelId(input) {
         if (!input || typeof input !== 'string') return null;
         const trimmed = input.trim();
-        if (!trimmed) return null;
+        if (!trimmed || trimmed.length > 300) return null;
+
+        // Reject inputs with characters that can't appear in URLs or handles
+        if (/[<>"{}|\\^`\x00-\x1f]/.test(trimmed)) return null;
 
         // Already a channel ID
         if (/^UC[\w-]{22}$/.test(trimmed)) return trimmed;
@@ -140,12 +145,32 @@ export class YouTubeClient {
             handle = customMatch[1];
         } else if (trimmed.startsWith('@')) {
             handle = trimmed.substring(1);
-        } else if (!trimmed.includes('/') && !trimmed.includes('.')) {
+        } else if (!trimmed.includes('/')) {
+            // Allow dots in direct handle inputs (e.g. "mr.beast") —
+            // YouTube handles can contain dots
             handle = trimmed;
         }
 
-        if (!handle) return null;
+        if (!handle || handle.length > 100 || !/^[\w.-]+$/.test(handle)) return null;
 
+        // Cache the resolution promise to prevent concurrent calls for the
+        // same handle from firing duplicate API requests (important for MCP)
+        const cacheKey = handle.toLowerCase();
+        if (this._channelIdCache.has(cacheKey)) {
+            return this._channelIdCache.get(cacheKey);
+        }
+
+        const promise = this._lookupHandle(handle);
+        this._channelIdCache.set(cacheKey, promise);
+        return promise;
+    }
+
+    /**
+     * Internal: resolve a handle to a channel ID via API.
+     * @param {string} handle
+     * @returns {Promise<string|null>}
+     */
+    async _lookupHandle(handle) {
         // Try forHandle first (modern channels, 2023+)
         const data = await this._request('channels', { part: 'id', forHandle: handle }, 1);
         if (data.items?.length > 0) return data.items[0].id;
