@@ -70,7 +70,7 @@ const NICHE_MULTIPLIERS = {
  * @param {number} params.subscribers       — subscriber count
  * @param {string} params.tier              — audience tier name
  * @param {number} params.engagementRate    — engagement rate (%)
- * @param {number} params.creatorScore      — Creator Score (0–100)
+ * @param {number} params.creatorFusionScore — Creator Fusion Score™ (0–100)
  * @param {string[]} params.contentCategories — channel topic categories
  * @param {object} params.sponsorship       — sponsorship detection results
  * @returns {RateCard}
@@ -80,7 +80,7 @@ export function generateRateCard({
     subscribers,
     tier,
     engagementRate,
-    creatorScore,
+    creatorFusionScore,
     contentCategories = [],
     sponsorship = null,
 }) {
@@ -105,11 +105,11 @@ export function generateRateCard({
     // ── Engagement premium/discount ──────────────────────────────────────────
     // Creators with above-average engagement can charge more
     let engagementMultiplier = 1.0;
-    if (creatorScore >= 80)      engagementMultiplier = 1.25;
-    else if (creatorScore >= 65) engagementMultiplier = 1.10;
-    else if (creatorScore >= 50) engagementMultiplier = 1.0;
-    else if (creatorScore >= 35) engagementMultiplier = 0.85;
-    else                         engagementMultiplier = 0.7;
+    if (creatorFusionScore >= 80)      engagementMultiplier = 1.25;
+    else if (creatorFusionScore >= 65) engagementMultiplier = 1.10;
+    else if (creatorFusionScore >= 50) engagementMultiplier = 1.0;
+    else if (creatorFusionScore >= 35) engagementMultiplier = 0.85;
+    else                               engagementMultiplier = 0.7;
 
     const combinedMultiplier = nicheMultiplier * engagementMultiplier;
 
@@ -142,7 +142,7 @@ export function generateRateCard({
         usageRightsAddon:         usageRights,
         adjustments: {
             niche: { category: matchedNiche, multiplier: r2(nicheMultiplier) },
-            engagement: { creatorScore, multiplier: r2(engagementMultiplier) },
+            engagement: { creatorFusionScore, multiplier: r2(engagementMultiplier) },
             combined: r2(combinedMultiplier),
         },
         brandDealExperience,

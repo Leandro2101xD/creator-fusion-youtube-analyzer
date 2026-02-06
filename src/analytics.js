@@ -2,7 +2,7 @@
  * Creator Analytics Engine
  *
  * Computes engagement metrics, posting consistency, audience quality signals,
- * and a composite Creator Score (0–100) for brand partnership evaluation.
+ * and the proprietary Creator Fusion Score™ (0–100) for brand partnership evaluation.
  *
  * © 2025 Creator Fusion LLC
  */
@@ -159,10 +159,13 @@ export function analyzeVideos(parsed, subscriberCount) {
     };
 }
 
-// ─── Creator Score ───────────────────────────────────────────────────────────
+// ─── Creator Fusion Score™ ────────────────────────────────────────────────────
 
 /**
- * Composite Creator Score (0–100).
+ * Creator Fusion Score™ — Proprietary composite score (0–100).
+ *
+ * The Creator Fusion Score™ and its weighted methodology are proprietary
+ * intellectual property of Creator Fusion LLC. See IP-PROTECTION.md.
  *
  * Weights:
  *   Engagement (tier-adjusted)  35%
@@ -171,7 +174,7 @@ export function analyzeVideos(parsed, subscriberCount) {
  *   View-to-subscriber ratio    15%
  *   Audience reach              15%
  */
-export function calculateCreatorScore(analytics, channelStats) {
+export function calculateCreatorFusionScore(analytics, channelStats) {
     const subscribers = safeInt(channelStats.subscriberCount);
     const tier        = classifyAudienceTier(subscribers);
     const bench       = ENGAGEMENT_BENCHMARKS[tier.name] ?? ENGAGEMENT_BENCHMARKS['Mid-Tier'];
@@ -242,7 +245,7 @@ export function calculateCreatorScore(analytics, channelStats) {
 /**
  * High-level partnership readiness summary.
  */
-export function generatePartnershipInsights(analytics, channelData, creatorScore) {
+export function generatePartnershipInsights(analytics, channelData, creatorFusionScore) {
     const subscribers = safeInt(channelData.statistics?.subscriberCount);
     const tier        = classifyAudienceTier(subscribers);
 
@@ -261,7 +264,7 @@ export function generatePartnershipInsights(analytics, channelData, creatorScore
     const strengths = [];
     const flags     = [];
 
-    const b = creatorScore.breakdown;
+    const b = creatorFusionScore.breakdown;
     if (b.engagement.score >= 80)  strengths.push('Exceptional engagement rate for tier');
     if (b.consistency.score >= 80) strengths.push('Very consistent posting schedule');
     if (b.frequency.score >= 80)   strengths.push('Strong posting cadence');
@@ -292,7 +295,7 @@ export function generatePartnershipInsights(analytics, channelData, creatorScore
         strengths,
         flags,
         contentCategories: topics,
-        recommendedForBrands: creatorScore.score >= 50 && flags.length <= 1,
+        recommendedForBrands: creatorFusionScore.score >= 50 && flags.length <= 1,
     };
 }
 

@@ -4,7 +4,7 @@
  * Orchestrates the full analysis pipeline per channel:
  *   1. Resolve channel input → channel ID
  *   2. Fetch channel details + recent videos
- *   3. Compute engagement analytics + Creator Score
+ *   3. Compute engagement analytics + Creator Fusion Score™
  *   4. (Optional) Scan for sponsorship indicators
  *   5. (Optional) Run engagement authenticity check
  *   6. (Optional) Generate sponsorship rate card
@@ -20,7 +20,7 @@ import { YouTubeClient } from './youtube-api.js';
 import {
     parseVideos,
     analyzeVideos,
-    calculateCreatorScore,
+    calculateCreatorFusionScore,
     generatePartnershipInsights,
     classifyAudienceTier,
 } from './analytics.js';
@@ -89,8 +89,8 @@ try {
             await Actor.pushData(result);
             processed++;
 
-            log.info(`✓ ${result.channelName} — Score: ${result.creatorScore.score} (${result.creatorScore.grade})`, {
-                tier: result.creatorScore.tier,
+            log.info(`✓ ${result.channelName} — CF Score: ${result.creatorFusionScore.score} (${result.creatorFusionScore.grade})`, {
+                tier: result.creatorFusionScore.tier,
                 engagement: `${result.analytics.engagementRate}%`,
             });
         } catch (error) {
@@ -197,9 +197,9 @@ async function processChannel(client, channelInput, options) {
     }
 
     // 5. Core analytics
-    const analytics    = analyzeVideos(parsed, subscribers);
-    const creatorScore = calculateCreatorScore(analytics, channelData.statistics);
-    const partnership  = generatePartnershipInsights(analytics, channelData, creatorScore);
+    const analytics         = analyzeVideos(parsed, subscribers);
+    const creatorFusionScore = calculateCreatorFusionScore(analytics, channelData.statistics);
+    const partnership       = generatePartnershipInsights(analytics, channelData, creatorFusionScore);
 
     // 6. Apply engagement rate filter
     if (minEngagementRate > 0 && analytics.engagementRate < minEngagementRate) {
@@ -225,9 +225,9 @@ async function processChannel(client, channelInput, options) {
         rateCard = generateRateCard({
             avgViews: analytics.avgViews,
             subscribers,
-            tier: creatorScore.tier,
+            tier: creatorFusionScore.tier,
             engagementRate: analytics.engagementRate,
-            creatorScore: creatorScore.score,
+            creatorFusionScore: creatorFusionScore.score,
             contentCategories: partnership.contentCategories,
             sponsorship,
         });
@@ -249,7 +249,7 @@ async function processChannel(client, channelInput, options) {
         joinedDate: channelData.snippet?.publishedAt?.split('T')[0] ?? null,
         thumbnailUrl: channelData.snippet?.thumbnails?.medium?.url ?? null,
 
-        creatorScore,
+        creatorFusionScore,
         analytics: {
             ...analytics,
             // Omit the full video array from the top-level output to keep it clean

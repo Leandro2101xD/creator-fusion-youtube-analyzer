@@ -2,7 +2,7 @@
 
 > **The only Apify actor that answers the question brands actually pay to answer: "Should I give this creator money, and how much?"**
 
-Analyze YouTube creators for brand partnerships with metrics no other scraper provides: a composite **Creator Score (0–100)**, **sponsorship history detection**, **engagement authenticity signals**, and **sponsorship rate card generation** — all from a single run using the free YouTube Data API. Zero proxy cost. Zero browser cost.
+Analyze YouTube creators for brand partnerships with metrics no other scraper provides: a composite **Creator Fusion Score™ (0–100)**, **sponsorship history detection**, **engagement authenticity signals**, and **sponsorship rate card generation** — all from a single run using the free YouTube Data API. Zero proxy cost. Zero browser cost.
 
 [![License](https://img.shields.io/badge/license-Proprietary-red.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)](https://nodejs.org)
@@ -18,7 +18,7 @@ The Apify Store has dozens of YouTube scrapers that pull subscriber counts and v
 |---|---|---|
 | Channel stats (subs, views) | ✅ | ✅ |
 | Video-level engagement metrics | Some | ✅ Detailed per-video breakdown |
-| **Composite Creator Score (0–100)** | ❌ | ✅ Tier-adjusted, weighted, graded A+ to F |
+| **Creator Fusion Score™ (0–100)** | ❌ | ✅ Tier-adjusted, weighted, graded A+ to F |
 | **Sponsorship history detection** | ❌ | ✅ Brands, promo codes, affiliate networks |
 | **Engagement authenticity analysis** | ❌ | ✅ 5-signal statistical anomaly detection |
 | **Sponsorship rate cards** | ❌ | ✅ 4 deal types × niche & engagement multipliers |
@@ -33,7 +33,7 @@ The Apify Store has dozens of YouTube scrapers that pull subscriber counts and v
 
 1. **You provide** a list of YouTube channels (URLs, `@handles`, or channel IDs) and your free YouTube Data API key.
 2. **The API client** fetches channel details and recent videos using the official YouTube Data API v3 — with automatic retry logic, quota tracking, and structured error handling.
-3. **The analytics engine** computes engagement metrics, posting consistency, audience quality, view distribution analysis, and a weighted Creator Score.
+3. **The analytics engine** computes engagement metrics, posting consistency, audience quality, view distribution analysis, and a weighted Creator Fusion Score™.
 4. **Sponsorship detection** scans every video description for FTC disclosure hashtags, sponsorship phrases, 25+ affiliate network URLs, 25+ known sponsor brands, and promo codes.
 5. **Authenticity analysis** runs 5 independent statistical checks on engagement patterns to flag potentially bought followers, fake likes, or bot activity.
 6. **Rate card generation** produces estimated sponsorship pricing across 4 deal types, adjusted by audience tier, content niche, engagement quality, and brand deal experience.
@@ -57,7 +57,7 @@ Every channel gets a full engagement and consistency breakdown computed from rec
 - **Top & Worst Performing Videos** — identifies best and worst content by views with full engagement stats
 - **Date Range Coverage** — shows the time span of analyzed content
 
-### 🏆 Creator Score (0–100)
+### 🏆 Creator Fusion Score™ (0–100)
 
 A composite score that ranks creators for brand partnership potential. The score is **tier-adjusted** — a 5% engagement rate means something very different for a 10K channel vs. a 1M channel.
 
@@ -145,7 +145,7 @@ Produces estimated pricing across **4 deal types**, adjusted by 3 multiplier lay
 **Adjustment multipliers:**
 
 1. **Niche Multiplier** — Finance (1.5×), Business (1.4×), Technology (1.3×), Science/Health (1.2×), Lifestyle/Education (1.1×), Gaming/Entertainment/Film (0.9×), Comedy (0.85×), Music (0.8×). Detected from YouTube's topic categories.
-2. **Engagement Multiplier** — Based on Creator Score: 80+ (1.25×), 65+ (1.10×), 50+ (1.0×), 35+ (0.85×), <35 (0.7×).
+2. **Engagement Multiplier** — Based on Creator Fusion Score™: 80+ (1.25×), 65+ (1.10×), 50+ (1.0×), 35+ (0.85×), <35 (0.7×).
 3. **Brand Deal Experience** — Assessed from sponsorship detection results: Very Experienced (10+ deals), Experienced (5+), Some Experience (1+), or No History.
 
 ### 🤝 Partnership Readiness Assessment
@@ -166,7 +166,7 @@ Automatically identifies strengths and red flags for brand partnerships:
 - High view variance (possible viral outliers skewing averages)
 - Low view-to-sub ratio (possible inactive audience)
 
-Includes a `recommendedForBrands` boolean — `true` if Creator Score ≥ 50 and ≤ 1 red flag.
+Includes a `recommendedForBrands` boolean — `true` if Creator Fusion Score™ ≥ 50 and ≤ 1 red flag.
 
 ---
 
@@ -183,7 +183,7 @@ Includes a `recommendedForBrands` boolean — `true` if Creator Score ≥ 50 and
     "totalViews": 4800000000,
     "totalVideos": 1850,
 
-    "creatorScore": {
+    "creatorFusionScore": {
         "score": 87,
         "grade": "A",
         "tier": "Mega",
@@ -244,7 +244,7 @@ Includes a `recommendedForBrands` boolean — `true` if Creator Score ≥ 50 and
         "usageRightsAddon": { "low": 36000, "mid": 78000, "high": 120000 },
         "adjustments": {
             "niche": { "category": "Technology", "multiplier": 1.3 },
-            "engagement": { "creatorScore": 87, "multiplier": 1.25 },
+            "engagement": { "creatorFusionScore": 87, "multiplier": 1.25 },
             "combined": 1.63
         },
         "brandDealExperience": "Experienced — regular brand deals"
@@ -319,7 +319,7 @@ All of these work:
 
 ## Use Cases
 
-**Brands & Agencies** — Evaluate creator rosters for campaigns. Compare Creator Scores, check sponsorship history, validate engagement authenticity, and generate rate cards before negotiating.
+**Brands & Agencies** — Evaluate creator rosters for campaigns. Compare Creator Fusion Scores™, check sponsorship history, validate engagement authenticity, and generate rate cards before negotiating.
 
 **Influencer Marketing Platforms** — Bulk-analyze creators for marketplace listings. The structured JSON output integrates directly into databases and dashboards.
 
@@ -378,7 +378,7 @@ All of these work:
 src/
 ├── main.js            — Orchestrator: input validation, channel pipeline, dataset output
 ├── youtube-api.js     — YouTube Data API v3 client with retry logic and quota tracking
-├── analytics.js       — Engagement metrics, Creator Score, partnership insights
+├── analytics.js       — Engagement metrics, Creator Fusion Score™, partnership insights
 ├── sponsorship.js     — FTC disclosure, affiliate link, and promo code detection
 ├── authenticity.js    — 5-signal statistical engagement fraud detection
 └── rate-card.js       — CPM-based rate card generator with niche/engagement multipliers
